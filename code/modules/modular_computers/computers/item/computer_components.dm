@@ -11,11 +11,11 @@
 			to_chat(user, SPAN_WARNING("All of the computer's expansion bays are filled."))
 			return FALSE
 		if(LAZYACCESS(expansion_bays, try_install.device_type))
-			to_chat(user, SPAN_WARNING("The computer immediately ejects /the [H] and flashes an error: \"Hardware Address Conflict\"."))
+			to_chat(user, SPAN_WARNING("The computer immediately ejects /the [try_install] and flashes an error: \"Hardware Address Conflict\"."))
 			return FALSE
 
 	if(all_components[try_install.device_type])
-		to_chat(user, SPAN_WARNING("This computer's hardware slot is already occupied by \the [all_components[H.device_type]]."))
+		to_chat(user, SPAN_WARNING("This computer's hardware slot is already occupied by \the [all_components[try_install.device_type]]."))
 		return FALSE
 	return TRUE
 
@@ -32,7 +32,7 @@
 		LAZYSET(expansion_bays, install.device_type, install)
 	all_components[install.device_type] = install
 
-	to_chat(user, SPAN_NOTICE("You install \the [H] into \the [src]."))
+	to_chat(user, SPAN_NOTICE("You install \the [install] into \the [src]."))
 	install.holder = src
 	install.forceMove(src)
 	install.on_install(src, user)
@@ -43,7 +43,7 @@
 	if(yeet.holder != src) // Not our component at all.
 		return FALSE
 
-	to_chat(user, SPAN_NOTICE("You remove \the [H] from \the [src]."))
+	to_chat(user, SPAN_NOTICE("You remove \the [yeet] from \the [src]."))
 
 	yeet.forceMove(get_turf(src))
 	forget_component(yeet)
